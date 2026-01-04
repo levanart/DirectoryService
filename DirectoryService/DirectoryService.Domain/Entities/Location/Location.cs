@@ -4,6 +4,8 @@ namespace DirectoryService.Domain.Entities.Location;
 
 public class Location
 {
+    private Location(){} //EF CORE
+    
     public Location(LocationName name, LocationAddress address, LocationTimezone timezone)
     {
         Id = Guid.NewGuid();
