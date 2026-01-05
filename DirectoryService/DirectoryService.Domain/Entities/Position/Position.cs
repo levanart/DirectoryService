@@ -4,6 +4,8 @@ namespace DirectoryService.Domain.Entities.Position;
 
 public class Position
 {
+    private Position(){} //EF CORE
+    
     public Position(PositionName name, PositionDescription description)
     {
         Id = Guid.NewGuid();

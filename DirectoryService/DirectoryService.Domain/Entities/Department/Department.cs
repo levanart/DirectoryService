@@ -4,6 +4,8 @@ namespace DirectoryService.Domain.Entities.Department;
 
 public class Department
 {
+    private Department(){} //EF CORE
+    
     public Department(DepartmentName name,
         DepartmentIdentifier identifier,
         Guid? parentId,
@@ -29,13 +31,13 @@ public class Department
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
-    
+
     public void Rename(DepartmentName newName)
     {
         Name = newName;
         UpdatedAt = DateTime.UtcNow;
     }
-    
+
     public void ChangeIdentifier(DepartmentIdentifier newIdentifier)
     {
         Identifier = newIdentifier;
