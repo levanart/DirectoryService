@@ -1,6 +1,6 @@
-﻿using DirectoryService.Domain.Entities.Department.ValueObjects;
+﻿using DirectoryService.Domain.ValueObjects.Department;
 
-namespace DirectoryService.Domain.Entities.Department;
+namespace DirectoryService.Domain.Entities;
 
 public class Department
 {

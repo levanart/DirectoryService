@@ -1,6 +1,6 @@
-using DirectoryService.Domain.Entities.Location.ValueObjects;
+using DirectoryService.Domain.ValueObjects.Location;
 
-namespace DirectoryService.Domain.Entities.Location;
+namespace DirectoryService.Domain.Entities;
 
 public class Location
 {

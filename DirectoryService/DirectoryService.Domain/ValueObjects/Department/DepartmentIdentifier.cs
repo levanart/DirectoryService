@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace DirectoryService.Domain.Entities.Department.ValueObjects;
+namespace DirectoryService.Domain.ValueObjects.Department;
 
 public record DepartmentIdentifier
 {

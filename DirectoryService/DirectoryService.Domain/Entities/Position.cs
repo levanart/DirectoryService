@@ -1,6 +1,6 @@
-using DirectoryService.Domain.Entities.Position.ValueObjects;
+using DirectoryService.Domain.ValueObjects.Position;
 
-namespace DirectoryService.Domain.Entities.Position;
+namespace DirectoryService.Domain.Entities;
 
 public class Position
 {

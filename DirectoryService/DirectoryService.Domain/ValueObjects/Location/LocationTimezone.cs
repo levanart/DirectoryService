@@ -1,4 +1,4 @@
-namespace DirectoryService.Domain.Entities.Location.ValueObjects;
+namespace DirectoryService.Domain.ValueObjects.Location;
 
 public record LocationTimezone
 {
