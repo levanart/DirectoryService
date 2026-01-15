@@ -32,7 +32,7 @@ public class LocationsService : ILocationsService
             new LocationTimezone(dto.Timezone)
         );
 
-        var locationId = await _repository.AddAsync(location, cancellationToken);
+        var locationId = await _repository.CreateAsync(location, cancellationToken);
 
         _logger.LogInformation("Created location with id {locationId}", locationId);
 
