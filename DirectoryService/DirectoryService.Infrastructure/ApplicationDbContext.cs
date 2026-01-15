@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DirectoryService.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DirectoryService.Infrastructure;
 
@@ -13,4 +14,6 @@ public class ApplicationDbContext(string connectionString) : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
+    
+    public DbSet<Location> Locations { get; set; }
 }
