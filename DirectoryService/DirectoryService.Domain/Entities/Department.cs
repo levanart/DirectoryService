@@ -17,6 +17,7 @@ public class Department
         ParentId = parentId;
         Path = path;
         Depth = path.Split(".").Length;
+        
         IsActive = true;
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;

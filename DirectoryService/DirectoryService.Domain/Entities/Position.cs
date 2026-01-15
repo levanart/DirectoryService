@@ -11,6 +11,10 @@ public class Position
         Id = Guid.NewGuid();
         Name = name;
         Description = description;
+        
+        IsActive = true;
+        CreatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTime.UtcNow;
     }
 
     public Guid Id { get; private set; }
