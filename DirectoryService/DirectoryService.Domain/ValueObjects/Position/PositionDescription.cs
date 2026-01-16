@@ -1,4 +1,4 @@
-namespace DirectoryService.Domain.Entities.Position.ValueObjects;
+namespace DirectoryService.Domain.ValueObjects.Position;
 
 public record PositionDescription
 {

@@ -1,6 +1,6 @@
-using DirectoryService.Domain.Entities.Position.ValueObjects;
+using DirectoryService.Domain.ValueObjects.Position;
 
-namespace DirectoryService.Domain.Entities.Position;
+namespace DirectoryService.Domain.Entities;
 
 public class Position
 {
@@ -11,6 +11,10 @@ public class Position
         Id = Guid.NewGuid();
         Name = name;
         Description = description;
+        
+        IsActive = true;
+        CreatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTime.UtcNow;
     }
 
     public Guid Id { get; private set; }

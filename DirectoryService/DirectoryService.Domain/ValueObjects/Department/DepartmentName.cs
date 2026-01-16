@@ -1,4 +1,4 @@
-namespace DirectoryService.Domain.Entities.Department.ValueObjects;
+namespace DirectoryService.Domain.ValueObjects.Department;
 
 public record DepartmentName
 {

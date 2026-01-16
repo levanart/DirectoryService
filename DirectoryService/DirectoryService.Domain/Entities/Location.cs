@@ -1,6 +1,6 @@
-using DirectoryService.Domain.Entities.Location.ValueObjects;
+using DirectoryService.Domain.ValueObjects.Location;
 
-namespace DirectoryService.Domain.Entities.Location;
+namespace DirectoryService.Domain.Entities;
 
 public class Location
 {
@@ -13,8 +13,9 @@ public class Location
         Address = address;
         Timezone = timezone;
         
-        CreatedAt = DateTime.Now;
-        UpdatedAt = DateTime.Now;
+        IsActive = true;
+        CreatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTime.UtcNow;
     }
     
     public Guid Id { get; private set; }
