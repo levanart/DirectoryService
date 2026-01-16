@@ -20,19 +20,19 @@ public class LocationsService : ILocationsService
         _logger = logger;
     }
 
-    public async Task<Guid> CreateLocationAsync(CreateLocationDto dto, CancellationToken cancellationToken)
+    public async Task<Guid> CreateLocationAsync(CreateLocationDto request, CancellationToken cancellationToken)
     {
-        var validationResult = await _validator.ValidateAsync(dto, cancellationToken);
+        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
         Location location = new Location(
-            new LocationName(dto.Name),
-            new LocationAddress(dto.Country, dto.Street, dto.BuildingNumber, dto.Town),
-            new LocationTimezone(dto.Timezone)
+            new LocationName(request.Name),
+            new LocationAddress(request.Country, request.Street, request.BuildingNumber, request.Town),
+            new LocationTimezone(request.Timezone)
         );
 
-        var locationId = await _repository.CreateAsync(location, cancellationToken);
+        var locationId = await _repository.AddAsync(location, cancellationToken);
 
         _logger.LogInformation("Created location with id {locationId}", locationId);
 

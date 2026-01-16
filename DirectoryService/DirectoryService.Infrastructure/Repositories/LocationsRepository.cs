@@ -12,7 +12,7 @@ public class LocationsRepository : ILocationsRepository
         _dbContext = dbContext;
     }
     
-    public async Task<Guid> CreateAsync(Location location, CancellationToken cancellationToken)
+    public async Task<Guid> AddAsync(Location location, CancellationToken cancellationToken)
     {
         await _dbContext.Locations.AddAsync(location, cancellationToken);
         
