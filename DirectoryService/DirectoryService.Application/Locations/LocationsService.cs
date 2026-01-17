@@ -1,8 +1,11 @@
-﻿using DirectoryService.Contracts.Locations;
+﻿using DirectoryService.Application.Extensions;
+using DirectoryService.Application.Locations.Fails.Exceptions;
+using DirectoryService.Contracts.Locations;
 using DirectoryService.Domain.Entities;
 using DirectoryService.Domain.ValueObjects.Location;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
+using Shared;
 
 namespace DirectoryService.Application.Locations;
 
@@ -11,7 +14,7 @@ public class LocationsService : ILocationsService
     private readonly ILocationsRepository _repository;
     private readonly IValidator<CreateLocationDto> _validator;
     private readonly ILogger<LocationsService> _logger;
-    
+
     public LocationsService(ILocationsRepository repository, IValidator<CreateLocationDto> validator,
         ILogger<LocationsService> logger)
     {
@@ -24,7 +27,7 @@ public class LocationsService : ILocationsService
     {
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new ValidationException(validationResult.Errors);
+            throw new LocationValidationException(validationResult.ToErrors());
 
         Location location = new Location(
             new LocationName(request.Name),

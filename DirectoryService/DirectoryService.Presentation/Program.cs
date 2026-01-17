@@ -1,5 +1,6 @@
 using DirectoryService.Application;
 using DirectoryService.Infrastructure;
+using DirectoryService.Presentation.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 
 var app = builder.Build();
+
+app.UseExceptionMiddleware();
 
 if (app.Environment.IsDevelopment())
 {
