@@ -1,5 +1,5 @@
-﻿using DirectoryService.Application.Extensions;
-using DirectoryService.Application.Locations.Fails.Exceptions;
+﻿using CSharpFunctionalExtensions;
+using DirectoryService.Application.Extensions;
 using DirectoryService.Contracts.Locations;
 using DirectoryService.Domain.Entities;
 using DirectoryService.Domain.ValueObjects.Location;
@@ -23,13 +23,13 @@ public class LocationsService : ILocationsService
         _logger = logger;
     }
 
-    public async Task<Guid> CreateLocationAsync(CreateLocationDto request, CancellationToken cancellationToken)
+    public async Task<Result<Guid, Failure>> CreateAsync(CreateLocationDto request, CancellationToken cancellationToken)
     {
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new LocationValidationException(validationResult.ToErrors());
+            return validationResult.ToErrors();
 
-        Location location = new Location(
+        var location = new Location(
             new LocationName(request.Name),
             new LocationAddress(request.Country, request.Street, request.BuildingNumber, request.Town),
             new LocationTimezone(request.Timezone)

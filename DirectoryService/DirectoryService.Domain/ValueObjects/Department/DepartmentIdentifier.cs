@@ -14,9 +14,9 @@ public record DepartmentIdentifier
         if (identifier.Length < 3 || identifier.Length > 150)
             throw new ArgumentException("The identifier must be between 3 and 150 characters");
         
-        if (!Regex.IsMatch(identifier, @"^[a-zA-Z]+$"))
+        if (!Regex.IsMatch(identifier, "^[a-zA-Z]+$"))
             throw new ArgumentException("The identifier must contain only Latin characters.");
         
         Identifier = identifier;
     }
-};
+}

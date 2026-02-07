@@ -18,6 +18,9 @@ public record Error
         Type = type;
         InvalidField = invalidField;
     }
+    
+
+    public static readonly Error None = new Error(string.Empty, string.Empty, ErrorType.None, string.Empty);
 
     public static Error NotFound(string? code, string message, Guid? id) =>
         new(code ?? "record.not.found", message, ErrorType.NotFound);
@@ -30,10 +33,17 @@ public record Error
 
     public static Error Failure(string? code, string message) =>
         new(code ?? "failure", message, ErrorType.Failure);
+    
+    public Failure ToFailure() => this;
 }
 
 public enum ErrorType
 {
+    /// <summary>
+    /// Нет ошибки/ошибка неизвестна
+    /// </summary>
+    None,
+    
     /// <summary>
     /// Ошибка валидации
     /// </summary>
