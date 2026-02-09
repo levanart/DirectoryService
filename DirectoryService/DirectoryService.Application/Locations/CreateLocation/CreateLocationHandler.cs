@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using DirectoryService.Application.Abstractions;
 using DirectoryService.Application.Extensions;
 using DirectoryService.Contracts.Locations;
 using DirectoryService.Domain.Entities;
@@ -9,9 +10,7 @@ using Shared;
 
 namespace DirectoryService.Application.Locations.CreateLocation;
 
-public record CreateLocationCommand(CreateLocationDto CreateLocationDto);
-
-public class CreateLocationHandler
+public class CreateLocationHandler : ICommandHandler<CreateLocationCommand, Guid>
 {
     private readonly ILocationsRepository _repository;
     private readonly IValidator<CreateLocationDto> _validator;

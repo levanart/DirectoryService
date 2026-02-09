@@ -29,7 +29,6 @@ public class ExceptionMiddleware
 
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-
         var (code, errors) = exception switch
         {
             BadRequestException => (StatusCodes.Status400BadRequest,
