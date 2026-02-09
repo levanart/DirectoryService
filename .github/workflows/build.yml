@@ -14,9 +14,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
-      - name: Go to project directory
-        run: cd ./DirectoryService && ls -a
       - name: Restore dependencies
-        run: ls -a && dotnet restore
+        run: cd ./DirectoryService && dotnet restore
       - name: Build
-        run: dotnet build --no-restore
+        run: cd ./DirectoryService && dotnet build --no-restore
