@@ -18,7 +18,6 @@ public record Error
         Type = type;
         InvalidField = invalidField;
     }
-    
 
     public static readonly Error None = new Error(string.Empty, string.Empty, ErrorType.None, string.Empty);
 

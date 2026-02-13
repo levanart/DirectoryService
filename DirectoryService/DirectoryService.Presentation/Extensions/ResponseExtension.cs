@@ -20,7 +20,7 @@ public static class ResponseExtension
             .Distinct()
             .ToList();
         
-        int statusCode = distinctErrorTypes.Count > 1
+        var statusCode = distinctErrorTypes.Count > 1
             ? StatusCodes.Status500InternalServerError
             : GetStatusCodeFromErrorType(distinctErrorTypes.First());
 

@@ -29,13 +29,15 @@ public class CreateLocationHandler : ICommandHandler<CreateLocationCommand, Guid
         var validationResult = await _validator.ValidateAsync(command.CreateLocationDto, cancellationToken);
         if (!validationResult.IsValid)
             return validationResult.ToErrors();
+        
+        var locationName = LocationName.Create(command.CreateLocationDto.Name).Value;
+        
+        var locationAddress = LocationAddress.Create(command.CreateLocationDto.Country, command.CreateLocationDto.Street,
+            command.CreateLocationDto.BuildingNumber, command.CreateLocationDto.Town).Value;
+        
+        var locationTimezone = LocationTimezone.Create(command.CreateLocationDto.Timezone).Value;
 
-        var location = new Location(
-            new LocationName(command.CreateLocationDto.Name),
-            new LocationAddress(command.CreateLocationDto.Country, command.CreateLocationDto.Street,
-                command.CreateLocationDto.BuildingNumber, command.CreateLocationDto.Town),
-            new LocationTimezone(command.CreateLocationDto.Timezone)
-        );
+        var location = new Location(locationName, locationAddress, locationTimezone);
 
         var locationId = await _repository.AddAsync(location, cancellationToken);
 

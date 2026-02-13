@@ -1,14 +1,22 @@
+using CSharpFunctionalExtensions;
+using Shared;
+
 namespace DirectoryService.Domain.ValueObjects.Position;
 
 public record PositionDescription
 {
     public string? Description { get; }
 
-    public PositionDescription(string? description)
+    private PositionDescription(string? description)
     {
-        if (!string.IsNullOrEmpty(description) && description.Length > 1000)
-            throw new ArgumentException("Description cannot exceed 1000 characters");
-        
         Description = description;
     }
-};
+
+    public static Result<PositionDescription, Failure> Create(string? description)
+    {
+        if (!string.IsNullOrEmpty(description) && description.Length > LengthConstants.MaxDescriptionLength)
+            return Error.Validation("position.description.too.long", $"Description cannot exceed {LengthConstants.MaxDescriptionLength} characters", "Description").ToFailure();
+
+        return new PositionDescription(description);
+    }
+}

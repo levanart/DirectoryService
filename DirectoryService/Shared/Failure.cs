@@ -8,7 +8,7 @@ public class Failure : IEnumerable<Error>
 
     public Failure(IEnumerable<Error> errors)
     {
-        _errors = [..errors];
+        _errors = errors.ToList();
     }
     
     public IEnumerator<Error> GetEnumerator()

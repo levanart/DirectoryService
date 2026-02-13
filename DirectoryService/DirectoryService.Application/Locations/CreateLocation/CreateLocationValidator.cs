@@ -1,5 +1,6 @@
 ﻿using DirectoryService.Contracts.Locations;
 using FluentValidation;
+using Shared;
 
 namespace DirectoryService.Application.Locations.CreateLocation;
 
@@ -12,8 +13,12 @@ public class CreateLocationValidator : AbstractValidator<CreateLocationDto>
             .WithMessage("Name is required")
             .WithErrorCode("location.name.required")
             
-            .MaximumLength(120)
-            .WithMessage("Name must be less than 120 characters")
+            .MinimumLength(LengthConstants.MinNameLength)
+            .WithMessage($"Name must be at least {LengthConstants.MinNameLength} characters")
+            .WithErrorCode("location.name.too.short")
+            
+            .MaximumLength(LengthConstants.MaxLocationNameLength)
+            .WithMessage($"Name must be less than {LengthConstants.MaxLocationNameLength} characters")
             .WithErrorCode("location.name.too.long");
 
         
@@ -22,8 +27,8 @@ public class CreateLocationValidator : AbstractValidator<CreateLocationDto>
             .WithMessage("Country is required")
             .WithErrorCode("location.country.required")
             
-            .MaximumLength(100)
-            .WithMessage("Country must be less than 100 characters")
+            .MaximumLength(LengthConstants.MaxCountryLength)
+            .WithMessage($"Country must be less than {LengthConstants.MaxCountryLength} characters")
             .WithErrorCode("location.country.too.long");
 
         
@@ -31,8 +36,8 @@ public class CreateLocationValidator : AbstractValidator<CreateLocationDto>
             .NotEmpty().WithMessage("Street is required")
             .WithErrorCode("location.street.required")
             
-            .MaximumLength(100)
-            .WithMessage("Street must be less than 100 characters")
+            .MaximumLength(LengthConstants.MaxStreetLength)
+            .WithMessage($"Street must be less than {LengthConstants.MaxStreetLength} characters")
             .WithErrorCode("location.street.too.long");
 
         
@@ -41,8 +46,8 @@ public class CreateLocationValidator : AbstractValidator<CreateLocationDto>
             .WithMessage("Town is required")
             .WithErrorCode("location.town.required")
             
-            .MaximumLength(100)
-            .WithMessage("Town must be less than 100 characters")
+            .MaximumLength(LengthConstants.MaxTownLength)
+            .WithMessage($"Town must be less than {LengthConstants.MaxTownLength} characters")
             .WithErrorCode("location.town.too.long");
 
         
@@ -51,8 +56,8 @@ public class CreateLocationValidator : AbstractValidator<CreateLocationDto>
             .WithMessage("BuildingNumber is required")
             .WithErrorCode("location.buildingNumber.required")
             
-            .MaximumLength(20)
-            .WithMessage("BuildingNumber must be less than 20 characters")
+            .MaximumLength(LengthConstants.MaxBuildingNumberLength)
+            .WithMessage($"BuildingNumber must be less than {LengthConstants.MaxBuildingNumberLength} characters")
             .WithErrorCode("location.buildingNumber.too.long");
 
         
@@ -61,8 +66,8 @@ public class CreateLocationValidator : AbstractValidator<CreateLocationDto>
             .WithMessage("Timezone is required")
             .WithErrorCode("location.timezone.required")
             
-            .MaximumLength(100)
-            .WithMessage("Timezone must be less than 100 characters")
+            .MaximumLength(LengthConstants.MaxTimezoneLength)
+            .WithMessage($"Timezone must be less than {LengthConstants.MaxTimezoneLength} characters")
             .WithErrorCode("location.timezone.too.long");
     }
 
