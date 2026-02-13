@@ -1,6 +1,7 @@
 using DirectoryService.Application;
 using DirectoryService.Infrastructure;
 using DirectoryService.Presentation.Middlewares;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +18,8 @@ app.UseExceptionMiddleware();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.UseSwaggerUI(options => options.SwaggerEndpoint("/openapi/v1.json", "DirectoryService"));
-    app.MapGet("/", () => Results.Redirect("/swagger"));
+    app.MapScalarApiReference();
+    app.MapGet("/", () => Results.Redirect("/scalar/v1"));
 }
 
 app.MapControllers();
