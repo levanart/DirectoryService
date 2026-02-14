@@ -1,17 +1,28 @@
+using CSharpFunctionalExtensions;
+using Shared;
+
 namespace DirectoryService.Domain.ValueObjects.Location;
 
 public record LocationName
 {
     public string Name { get; }
 
-    public LocationName(string name)
+    private LocationName(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("Locatio name cannot be empty.");
-        
-        if (name.Length < 3 || name.Length > 120)
-            throw new ArgumentException("The location name must be between 3 and 120 characters");
-        
         Name = name;
     }
-};
+
+    public static Result<LocationName, Failure> Create(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return Error.Validation("location.name.required", "Location name cannot be empty.", "Name").ToFailure();
+
+        if (name.Length < LengthConstants.MinNameLength)
+            return Error.Validation("location.name.too.short", $"The location name must be at least {LengthConstants.MinNameLength} characters", "Name").ToFailure();
+
+        if (name.Length > LengthConstants.MaxLocationNameLength)
+            return Error.Validation("location.name.too.long", $"The location name must be less than {LengthConstants.MaxLocationNameLength} characters", "Name").ToFailure();
+
+        return new LocationName(name);
+    }
+}

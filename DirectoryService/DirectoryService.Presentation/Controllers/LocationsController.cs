@@ -1,6 +1,7 @@
-using DirectoryService.Application.Locations;
+using DirectoryService.Application.Locations.CreateLocation;
 using DirectoryService.Contracts.Locations;
 using Microsoft.AspNetCore.Mvc;
+using Shared.EndpointResults;
 
 namespace DirectoryService.Presentation.Controllers;
 
@@ -8,18 +9,14 @@ namespace DirectoryService.Presentation.Controllers;
 [ApiController]
 public class LocationsController : ControllerBase
 {
-    private readonly ILocationsService _service;
-
-    public LocationsController(ILocationsService service)
-    {
-        _service = service;
-    }
-
     [HttpPost]
-    public async Task<IActionResult> CreateLocation([FromBody] CreateLocationDto request,
+    public async Task<EndpointResult<Guid>> CreateLocation(
+        [FromServices] CreateLocationHandler handler,
+        [FromBody] CreateLocationDto request,
         CancellationToken cancellationToken)
     {
-        var createdLocationId = await _service.CreateLocationAsync(request, cancellationToken);
-        return Ok(createdLocationId);
+        var command = new CreateLocationCommand(request);
+        
+        return await handler.Handle(command, cancellationToken);
     }
 }
