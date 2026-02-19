@@ -1,8 +1,4 @@
-﻿using System.Text.Json;
-using DirectoryService.Application.Exceptions;
-using Shared;
-
-namespace DirectoryService.Presentation.Middlewares;
+﻿namespace DirectoryService.Presentation.Middlewares;
 
 public class ExceptionMiddleware
 {
@@ -29,24 +25,12 @@ public class ExceptionMiddleware
 
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        var (code, errors) = exception switch
-        {
-            BadRequestException => (StatusCodes.Status400BadRequest,
-                JsonSerializer.Deserialize<IEnumerable<Error>>(exception.Message)),
-            
-            NotFoundException => (StatusCodes.Status404NotFound,
-                JsonSerializer.Deserialize<IEnumerable<Error>>(exception.Message)),
-            
-            _ => (StatusCodes.Status500InternalServerError, [Error.Failure(null, "Internal Server Error")])
-        };
-        
         context.Response.ContentType = "application/json";
-        context.Response.StatusCode = code;
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
         
-        if (code == StatusCodes.Status500InternalServerError)
-            _logger.LogError(exception, exception.Message);
+        _logger.LogError(exception, exception.Message);
         
-        await context.Response.WriteAsync(JsonSerializer.Serialize(errors));
+        await context.Response.WriteAsync("Internal Server Error");
     }
 }
 
