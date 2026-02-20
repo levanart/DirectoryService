@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="DirectoryService.Application/DirectoryService.Application.csproj" />
+    <Project Path="DirectoryService.Contracts/DirectoryService.Contracts.csproj" />
+    <Project Path="DirectoryService.Domain/DirectoryService.Domain.csproj" />
+    <Project Path="DirectoryService.Infrastructure/DirectoryService.Infrastructure.csproj" />
+    <Project Path="DirectoryService.Presentation/DirectoryService.Presentation.csproj" />
+    <Project Path="Shared/Shared.csproj" />
+  </Folder>
+</Solution>
